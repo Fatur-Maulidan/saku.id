@@ -29,15 +29,18 @@ public class CatatanKasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catatan_kas);
 
+//      Get Data Layout
         varEtNominal = findViewById(R.id.etNominal);
         varEtCatatan = findViewById(R.id.etCatatan);
         varDpTanggal = findViewById(R.id.dpTanggal);
         varRgPilihan = findViewById(R.id.rgPilihan);
         varBtnYakin = findViewById(R.id.btnYakin);
 
+//      Ketika Button Yakin di Klik
         varBtnYakin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//              Mengambil data dari layout Nominal Catatan Tanggal dan Juga Pilihan (Pendapatan/Pengeluaran)
                 nominal = varEtNominal.getText().toString();
                 catatan = varEtCatatan.getText().toString();
 
@@ -54,25 +57,39 @@ public class CatatanKasActivity extends AppCompatActivity {
 
                 // Format tanggal menjadi string
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                String tanggal = dateFormat.format(calendar.getTime());
+                tanggal = dateFormat.format(calendar.getTime());
 
+//              Cek Data mana yang diklik
                 int selectedId = varRgPilihan.getCheckedRadioButtonId();
 
+//              Ketika Pendapatan/Pengeluaran ada yang dipilih
                 if(selectedId != -1) {
+//                    Pilih Pendapatan
                     if (selectedId == R.id.rbPendapatan) {
                         pilihan = "pendapatan";
-                    } else if (selectedId == R.id.rbPengeluaran) {
+                    }
+//                    Pilih Pengeluaran
+                    else if (selectedId == R.id.rbPengeluaran) {
                         pilihan = "pengeluaran";
                     }
                 }
 
+//              Instance Database
                 DBHandler db = new DBHandler(CatatanKasActivity.this);
+
+//              Ketika ada salah satu form kosong
                 if(nominal.isEmpty() || catatan.isEmpty() || tanggal.isEmpty() || pilihan.isEmpty()) {
-                    Toast.makeText(CatatanKasActivity.this, "Isi semua data dengan benar"+nominal+" "+catatan+" "+tanggal+" "+pilihan, Toast.LENGTH_SHORT).show();
-                } else {
+//                  Memberikan short message bahwa data belum terisi
+                    Toast.makeText(CatatanKasActivity.this, "Isi semua data dengan benar", Toast.LENGTH_SHORT).show();
+                }
+//              Ketika semua berhasil terisi
+                else {
                     db.addNewData(catatan,pilihan,nominal,tanggal);
 
+//                  Semua data berhasil terisi dan masuk kedalam database
                     Toast.makeText(CatatanKasActivity.this, "Data berhasil dimasukkan kedalam database", Toast.LENGTH_SHORT).show();
+
+//                  Dipindahkan ke aktivitas Home yaitu bagian tampilan awal
                     startActivity(new Intent(CatatanKasActivity.this, HomeActivity.class));
                 }
             }

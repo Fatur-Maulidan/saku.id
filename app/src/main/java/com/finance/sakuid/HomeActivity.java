@@ -20,12 +20,15 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+//      Bottom navigasi yang ada pendapatan dan pengeluaran
         bottomNavigation = findViewById(R.id.bottomNavBar);
 
+//      Default Navigasi biar terdapat pada Pendapatan
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.containerFragment, new PendapatanFragment()).commit();
 
+//      Ketika Bottom Navigasi diklik maka akan berpindah - pindah
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

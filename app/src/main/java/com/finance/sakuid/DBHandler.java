@@ -22,6 +22,7 @@ public class DBHandler extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+//  Create Table
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_NAME + " ("
@@ -34,6 +35,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
+//  Insert Data
     public void addNewData(String keterangan, String status, String jumlah, String tanggal) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -50,12 +52,14 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+//  Get Data by Pendapatan/Pengeluaran
     public Cursor getData(String status){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM tbl_kelola WHERE status = ?",new String[]{status});
         return cursor;
     }
 
+//  Sum Data Pendapatan - Pengeluaran
     public int sumData() {
         SQLiteDatabase db = this.getReadableDatabase();
         int total = 0;

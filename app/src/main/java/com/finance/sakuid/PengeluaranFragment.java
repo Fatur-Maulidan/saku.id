@@ -70,20 +70,26 @@ public class PengeluaranFragment extends Fragment {
 
         ImageView varBtnTambah = view.findViewById(R.id.btnIconTambah);
 
+//      Instance Object
         db = new DBHandler(getActivity());
         varCatatan = new ArrayList<>();
         varNominal = new ArrayList<>();
         varTanggal = new ArrayList<>();
 
+//      Get Data From Layout
         recyclerView = view.findViewById(R.id.recyclerViewPengeluaran);
         adapter = new MyAdapterPengeluaran(getActivity(),varCatatan,varNominal,varTanggal);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+//      Pemanggilan method untuk memunculkan data pada onViewCreated
         displayData();
 
+//      Show Jumlah saldo
         TextView jmlhSaldo = view.findViewById(R.id.tvJumlahSaldo);
         jmlhSaldo.setText(String.valueOf(db.sumData()));
 
+//      Ketika Button tambah diklik
         varBtnTambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +98,7 @@ public class PengeluaranFragment extends Fragment {
         });
     }
 
+//  Munculkan semua data dari database kedalam tampilan
     private void displayData(){
         Cursor cursor = db.getData("pengeluaran");
         if(cursor.getCount()==0){

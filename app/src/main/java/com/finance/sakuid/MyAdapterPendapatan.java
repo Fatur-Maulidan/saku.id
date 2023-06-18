@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+// Class ini digunakan untuk menampilkan data pada Pendapatan
 public class MyAdapterPendapatan extends RecyclerView.Adapter<MyAdapterPendapatan.MyViewHolder> {
     private Context context;
     private ArrayList<String> catatan;
