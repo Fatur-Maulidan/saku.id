@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Pendapatan"
+        android:id="@+id/homeBotNavBar"
+        android:icon="@drawable/wallet_pendapatan_icon"
+        />
+    <item
+        android:title="Pengeluaran"
+        android:id="@+id/bantuanBotNavBar"
+        android:icon="@drawable/wallet_pengeluaran_icon"
+        />
+
+
+</menu>
